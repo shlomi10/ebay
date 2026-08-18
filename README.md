@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/ebay-logo.svg" alt="ebay" width="180">
+</p>
+
 # 🛒 ebay
 
 [![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -126,6 +130,8 @@ tests/test_price_parser.py
 ```text
 ebay/
 ├── .github/workflows/e2e.yml
+├── assets/
+│   └── ebay-logo.svg
 ├── config/
 │   └── settings.py
 ├── data/
