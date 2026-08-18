@@ -37,12 +37,6 @@ jobs:
       - name: Run tests
         run: pytest
 
-      - uses: actions/setup-java@v4
-        if: always()
-        with:
-          distribution: temurin
-          java-version: "17"
-
       - uses: actions/setup-node@v4
         if: always()
         with:
@@ -51,11 +45,19 @@ jobs:
       - name: Generate Allure report
         if: always()
         run: |
-          npm install -g allure-commandline@2.32.0
-          allure generate reports/allure-results -o reports/allure-report --clean
+          npm install -g allure@3.6.2
+          allure generate reports/allure-results -o reports/allure-report
+          python - <<'PY'
+          from pathlib import Path
+          index = Path("reports/allure-report/index.html")
+          html = index.read_text(encoding="utf-8")
+          if "<base " not in html.lower():
+              html = html.replace("<head>", '<head>\n    <base href="/ebay/">', 1)
+          index.write_text(html, encoding="utf-8")
+          Path("reports/allure-report/404.html").write_text(html, encoding="utf-8")
+          PY
           mkdir -p reports/allure-report/data/attachments
           find reports/allure-results -type f \( -name '*.png' -o -name '*attachment*' \) -exec cp -n {} reports/allure-report/data/attachments/ \;
-          cp reports/allure-report/index.html reports/allure-report/404.html
 
       - name: Upload reports
         if: always()
