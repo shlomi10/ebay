@@ -485,7 +485,9 @@ When the job finishes on `main`, the Allure HTML report is published to GitHub P
 
 **https://shlomi10.github.io/ebay/**
 
-Repo **Settings → Pages → Source** must be **GitHub Actions** (set once). You can still download the `reports` artifact from the Actions run.
+One-time setup: repo **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `gh-pages` / `/ (root)` → Save**.
+
+You can still download the `reports` artifact from the Actions run.
 
 Optional login secrets: repo **Settings → Secrets and variables → Actions** → `EBAY_USER` and `EBAY_PASS`.
 
