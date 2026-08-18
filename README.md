@@ -28,14 +28,6 @@
 
 End-to-end automation for [ebay.com](https://www.ebay.com/): search by name and price, add items to the cart, and assert that the cart total does not exceed the budget.
 
-Repository:
-
-```bash
-https://github.com/shlomi10/ebay
-```
-
-> Captcha is not handled. If a challenge or block appears, the test continues as a guest.
-
 ---
 
 ## 📚 Table of contents
