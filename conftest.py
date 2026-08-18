@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import os
 
 import allure
 import pytest
@@ -94,15 +95,26 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(scope="session")
 def browser_type_launch_args(browser_type_launch_args, settings):
+    args = ["--disable-blink-features=AutomationControlled"]
+    if os.getenv("CI"):
+        args.extend(
+            [
+                "--disable-dev-shm-usage",
+                "--no-sandbox",
+                "--disable-gpu",
+                "--disable-software-rasterizer",
+            ]
+        )
     return {
         **browser_type_launch_args,
         "headless": settings.headless,
-        "args": ["--disable-blink-features=AutomationControlled"],
+        "args": args,
     }
 
 
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args, settings):
+    viewport = {"width": 1280, "height": 720} if os.getenv("CI") else {"width": 1440, "height": 900}
     return {
         **browser_context_args,
         "base_url": settings.base_url,
@@ -111,6 +123,6 @@ def browser_context_args(browser_context_args, settings):
         "geolocation": {"latitude": 40.7128, "longitude": -74.006},
         "permissions": ["geolocation"],
         "extra_http_headers": {"Accept-Language": "en-US,en;q=0.9"},
-        "viewport": {"width": 1440, "height": 900},
+        "viewport": viewport,
         "ignore_https_errors": True,
     }

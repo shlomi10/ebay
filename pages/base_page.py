@@ -101,7 +101,7 @@ class BasePage:
         try:
             locator.first.wait_for(state="visible", timeout=timeout)
             return True
-        except PlaywrightTimeoutError:
+        except Exception:
             return False
 
     def click_visible(self, locator: Locator, timeout: int = 1500) -> bool:
