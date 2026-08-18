@@ -12,7 +12,6 @@
 [![python-dotenv](https://img.shields.io/badge/.env-python--dotenv-ECD53F?style=for-the-badge&logoColor=111)](https://github.com/theskumar/python-dotenv)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/shlomi10/ebay/actions)
 [![CI](https://github.com/shlomi10/ebay/actions/workflows/e2e.yml/badge.svg)](https://github.com/shlomi10/ebay/actions/workflows/e2e.yml)
-[![eBay](https://img.shields.io/badge/ebay.com-E53238?style=for-the-badge&logo=ebay&logoColor=white)](https://www.ebay.com/)
 [![POM](https://img.shields.io/badge/POM-Page%20Object%20Model-6C63FF?style=for-the-badge&logo=abstract&logoColor=white)](#-architecture)
 [![OOP](https://img.shields.io/badge/OOP-SRP-14B8A6?style=for-the-badge&logo=checkmarx&logoColor=white)](#-architecture)
 [![Data Driven](https://img.shields.io/badge/Data--Driven-JSON-2088FF?style=for-the-badge&logo=json&logoColor=white)](data/test_data.json)
@@ -25,8 +24,6 @@
 [![Traces](https://img.shields.io/badge/Playwright-Traces-A855F7?style=for-the-badge&logo=playwright&logoColor=white)](#-runtime-artifacts)
 [![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/shlomi10/ebay)
 [![Ubuntu](https://img.shields.io/badge/CI-Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://github.com/shlomi10/ebay/actions)
-[![Open Source](https://img.shields.io/badge/GitHub-shlomi10%2Febay-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shlomi10/ebay)
-[![Made by Shlomi](https://img.shields.io/badge/Made%20by-Shlomi-F43F5E?style=for-the-badge&logo=heart&logoColor=white)](#️-made-by)
 
 
 End-to-end automation for [ebay.com](https://www.ebay.com/): search by name and price, add items to the cart, and assert that the cart total does not exceed the budget.
