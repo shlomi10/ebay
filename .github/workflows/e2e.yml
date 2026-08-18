@@ -1,0 +1,59 @@
+name: ebay
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      HEADLESS: "true"
+      EBAY_BASE_URL: https://www.ebay.com
+      EBAY_CART_URL: https://cart.ebay.com/
+      EBAY_TIMEOUT_MS: "45000"
+      EBAY_BUY_IT_NOW_ONLY: "true"
+      EBAY_FREE_SHIPPING_ONLY: "true"
+      EBAY_USER: ${{ secrets.EBAY_USER }}
+      EBAY_PASS: ${{ secrets.EBAY_PASS }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Playwright browser
+        run: playwright install chromium --with-deps
+
+      - name: Run tests
+        run: pytest
+
+      - uses: actions/setup-node@v4
+        if: always()
+        with:
+          node-version: "20"
+
+      - name: Generate Allure report
+        if: always()
+        run: |
+          npm install -g allure-commandline
+          allure generate reports/allure-results -o reports/allure-report --clean
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          if-no-files-found: ignore
+          path: |
+            reports/report.html
+            reports/allure-report
+            reports/screenshots
+            reports/traces
+            reports/allure-results

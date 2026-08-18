@@ -1,0 +1,16 @@
+{
+  "cases": [
+    {
+      "name": "usb_cable_under_10",
+      "query": "usb c cable",
+      "max_price": 5,
+      "limit": 2
+    },
+    {
+      "name": "shoes_under_60",
+      "query": "shoes",
+      "max_price": 60,
+      "limit": 1
+    }
+  ]
+}
