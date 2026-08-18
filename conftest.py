@@ -78,18 +78,16 @@ def pytest_runtest_makereport(item, call):
     logs = getattr(item, "page_logs", [])
     log_text = f"url={page.url}\n" + ("\n".join(logs) if logs else "(no browser logs)")
     html_extras = getattr(report, "extras", [])
-    if report.failed:
-        try:
-            png = page.screenshot(full_page=True)
-            allure.attach(png, name="failure-screenshot", attachment_type=allure.attachment_type.PNG)
-            html_extras.append(extras.png(base64.b64encode(png).decode("ascii")))
-        except Exception:
-            pass
-        allure.attach(log_text, name="failure-log", attachment_type=allure.attachment_type.TEXT)
-        html_extras.append(extras.text(log_text, name="failure-log"))
-    elif report.passed:
-        allure.attach(log_text, name="success-log", attachment_type=allure.attachment_type.TEXT)
-        html_extras.append(extras.text(log_text, name="success-log"))
+    try:
+        png = page.screenshot(full_page=True)
+        shot_name = "failure-screenshot" if report.failed else "screenshot"
+        allure.attach(png, name=shot_name, attachment_type=allure.attachment_type.PNG)
+        html_extras.append(extras.png(base64.b64encode(png).decode("ascii"), shot_name))
+    except Exception:
+        pass
+    log_name = "failure-log" if report.failed else "success-log"
+    allure.attach(log_text, name=log_name, attachment_type=allure.attachment_type.TEXT)
+    html_extras.append(extras.text(log_text, name=log_name))
     report.extras = html_extras
 
 

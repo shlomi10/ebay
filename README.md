@@ -361,6 +361,14 @@ Live CI report on GitHub Pages. It stays up to date: every successful run on `ma
 
 **https://shlomi10.github.io/ebay/**
 
+CI skips the live ebay E2E tests (bot-challenge on GitHub IPs), so that published report has no screenshots. Run E2E locally headed to get screenshots in Allure (`cart-total` plus a page screenshot on pass/fail):
+
+```powershell
+pytest -m e2e --headed
+allure generate reports/allure-results -o reports/allure-report --clean
+allure open reports/allure-report
+```
+
 `pytest.ini` already sets `--alluredir=reports/allure-results`.
 
 1. Install Allure CLI and check it:
@@ -501,7 +509,7 @@ Optional login secrets: repo **Settings → Secrets and variables → Actions** 
 [pytest]
 pythonpath = .
 testpaths = tests
-addopts = -v --alluredir=reports/allure-results --html=reports/report.html --self-contained-html --screenshot=only-on-failure --video=retain-on-failure --tracing=retain-on-failure
+addopts = -v --alluredir=reports/allure-results --html=reports/report.html --self-contained-html --screenshot=off --video=off --tracing=retain-on-failure
 markers =
     e2e: end-to-end ebay shopping flow
 ```
