@@ -466,13 +466,17 @@ Edit `data/test_data.json`. Pytest builds one test per `cases[]` entry.
 
 Workflow: [`.github/workflows/e2e.yml`](https://github.com/shlomi10/ebay/blob/main/.github/workflows/e2e.yml)
 
-Runs on push, pull request, and `workflow_dispatch`, in headless mode.
+Runs on push, pull request, and `workflow_dispatch`.
 
-When the job finishes, download the `reports` artifact from the Actions run (pytest-html + Allure HTML + screenshots/traces). Reports are uploaded even if tests fail (`if: always()`).
+CI runs the price-parser unit tests. The live ebay E2E tests are skipped on GitHub Actions because ebay serves `splashui/challenge` to datacenter IPs (bot check). Run E2E locally headed:
+
+```powershell
+pytest -m e2e --headed
+```
+
+When the job finishes, download the `reports` artifact from the Actions run.
 
 Optional login secrets: repo **Settings → Secrets and variables → Actions** → `EBAY_USER` and `EBAY_PASS`.
-
-ebay often blocks datacenter IPs. E2E tests may fail on GitHub runners even when they pass locally.
 
 ---
 

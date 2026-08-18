@@ -32,6 +32,8 @@ class SearchResultsPage(BasePage):
     @allure.step("wait for search results")
     def wait_for_results(self) -> None:
         self.logger.info("Wait for search results")
+        if "splashui/challenge" in self.page.url:
+            raise AssertionError("ebay showed a bot-challenge page instead of search results")
         try:
             self.wait_visible(self.results_list.first, timeout=8000)
         except Exception:

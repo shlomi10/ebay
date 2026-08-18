@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 
 import allure
 import pytest
@@ -14,6 +15,10 @@ CASES = json.loads(TEST_DATA_PATH.read_text(encoding="utf-8"))["cases"]
 @allure.epic("ebay")
 @allure.feature("Search, cart, budget")
 @pytest.mark.e2e
+@pytest.mark.skipif(
+    os.getenv("CI") == "true",
+    reason="ebay serves splashui/challenge on GitHub Actions IPs",
+)
 @pytest.mark.parametrize("case", CASES, ids=lambda case: case["name"])
 def test_search_add_to_cart_budget(page_setup, settings, case):
     shop = EbayShop(page_setup, settings)
