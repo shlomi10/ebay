@@ -4,6 +4,11 @@
 
 # 🛒 ebay
 
+<p align="center">
+  <a href="#️-running-tests"><img src="https://img.shields.io/badge/%E2%96%B6%20Run%20tests-22C55E?style=for-the-badge" alt="Run tests"></a>
+  <a href="https://shlomi10.github.io/ebay/"><img src="https://img.shields.io/badge/%E2%96%B6%20Allure%20report-FF6A00?style=for-the-badge" alt="Allure report"></a>
+</p>
+
 [![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/python/)
 [![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://docs.pytest.org/)
@@ -365,7 +370,7 @@ CI skips the live ebay E2E tests (bot-challenge on GitHub IPs), so that publishe
 
 ```powershell
 pytest -m e2e --headed
-allure generate reports/allure-results -o reports/allure-report --clean
+allure generate reports/allure-results -o reports/allure-report
 allure open reports/allure-report
 ```
 
@@ -387,7 +392,7 @@ pytest --headed --alluredir=reports/allure-results
 3. Build the HTML report:
 
 ```bash
-allure generate reports/allure-results -o reports/allure-report --clean
+allure generate reports/allure-results -o reports/allure-report
 ```
 
 4. Open the report:
@@ -546,7 +551,7 @@ pytest -m e2e --headed
 pytest -k usb_cable_under_10 --headed
 pytest --alluredir=reports/allure-results
 pytest --html=reports/report.html --self-contained-html
-allure generate reports/allure-results -o reports/allure-report --clean
+allure generate reports/allure-results -o reports/allure-report
 allure open reports/allure-report
 allure serve reports/allure-results
 playwright show-trace reports/traces/cart-total.zip
