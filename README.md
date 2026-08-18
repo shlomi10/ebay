@@ -1,4 +1,4 @@
-# ebay
+# 🛒 ebay
 
 [![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/python/)
@@ -9,20 +9,20 @@
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/shlomi10/ebay/actions)
 [![CI](https://github.com/shlomi10/ebay/actions/workflows/e2e.yml/badge.svg)](https://github.com/shlomi10/ebay/actions/workflows/e2e.yml)
 [![eBay](https://img.shields.io/badge/ebay.com-E53238?style=for-the-badge&logo=ebay&logoColor=white)](https://www.ebay.com/)
-[![POM](https://img.shields.io/badge/POM-Page%20Object%20Model-6C63FF?style=for-the-badge)](#architecture)
-[![OOP](https://img.shields.io/badge/OOP-SRP-14B8A6?style=for-the-badge)](#architecture)
+[![POM](https://img.shields.io/badge/POM-Page%20Object%20Model-6C63FF?style=for-the-badge&logo=abstract&logoColor=white)](#-architecture)
+[![OOP](https://img.shields.io/badge/OOP-SRP-14B8A6?style=for-the-badge&logo=checkmarx&logoColor=white)](#-architecture)
 [![Data Driven](https://img.shields.io/badge/Data--Driven-JSON-2088FF?style=for-the-badge&logo=json&logoColor=white)](data/test_data.json)
-[![E2E](https://img.shields.io/badge/Tests-E2E-F59E0B?style=for-the-badge)](tests/test_ebay_cart_e2e.py)
-[![Guest](https://img.shields.io/badge/Auth-Guest-22C55E?style=for-the-badge)](#limitations-and-assumptions)
-[![Headed](https://img.shields.io/badge/Browser-Headed-06B6D4?style=for-the-badge)](#running-tests)
-[![Headless](https://img.shields.io/badge/CI-Headless-64748B?style=for-the-badge)](#github-actions)
-[![Logging](https://img.shields.io/badge/Logging-Enabled-2F4858?style=for-the-badge)](#runtime-artifacts)
-[![Screenshots](https://img.shields.io/badge/Screenshots-On%20Failure-EC4899?style=for-the-badge)](#runtime-artifacts)
-[![Traces](https://img.shields.io/badge/Playwright-Traces-A855F7?style=for-the-badge)](#runtime-artifacts)
+[![E2E](https://img.shields.io/badge/Tests-E2E-F59E0B?style=for-the-badge&logo=testinglibrary&logoColor=white)](tests/test_ebay_cart_e2e.py)
+[![Guest](https://img.shields.io/badge/Auth-Guest-22C55E?style=for-the-badge&logo=auth0&logoColor=white)](#️-limitations-and-assumptions)
+[![Headed](https://img.shields.io/badge/Browser-Headed-06B6D4?style=for-the-badge&logo=googlechrome&logoColor=white)](#️-running-tests)
+[![Headless](https://img.shields.io/badge/CI-Headless-64748B?style=for-the-badge&logo=googlechrome&logoColor=white)](#-github-actions)
+[![Logging](https://img.shields.io/badge/Logging-Enabled-2F4858?style=for-the-badge&logo=datadog&logoColor=white)](#-runtime-artifacts)
+[![Screenshots](https://img.shields.io/badge/Screenshots-On%20Failure-EC4899?style=for-the-badge&logo=googlephotos&logoColor=white)](#-runtime-artifacts)
+[![Traces](https://img.shields.io/badge/Playwright-Traces-A855F7?style=for-the-badge&logo=playwright&logoColor=white)](#-runtime-artifacts)
 [![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/shlomi10/ebay)
 [![Ubuntu](https://img.shields.io/badge/CI-Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://github.com/shlomi10/ebay/actions)
 [![Open Source](https://img.shields.io/badge/GitHub-shlomi10%2Febay-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shlomi10/ebay)
-[![Made by Shlomi](https://img.shields.io/badge/Made%20by-Shlomi-F43F5E?style=for-the-badge)](#️-made-by)
+[![Made by Shlomi](https://img.shields.io/badge/Made%20by-Shlomi-F43F5E?style=for-the-badge&logo=heart&logoColor=white)](#️-made-by)
 
 
 End-to-end automation for [ebay.com](https://www.ebay.com/): search by name and price, add items to the cart, and assert that the cart total does not exceed the budget.
@@ -37,7 +37,31 @@ https://github.com/shlomi10/ebay
 
 ---
 
-## Overview
+## 📚 Table of contents
+
+- [📌 Overview](#-overview)
+- [✅ Automated scenario](#-automated-scenario)
+- [🧱 Project structure](#-project-structure)
+- [🛠 Tech stack](#-tech-stack)
+- [🏗 Architecture](#-architecture)
+- [✅ Prerequisites](#-prerequisites)
+- [⚙️ Environment variables](#️-environment-variables)
+- [📦 Installation](#-installation)
+- [▶️ Running tests](#️-running-tests)
+- [📊 Allure report](#-allure-report)
+- [📄 HTML report](#-html-report)
+- [📁 Runtime artifacts](#-runtime-artifacts)
+- [🧪 Test data](#-test-data)
+- [🚀 GitHub Actions](#-github-actions)
+- [🧷 Pytest configuration](#-pytest-configuration)
+- [⚠️ Limitations](#️-limitations-and-assumptions)
+- [📌 Notes](#-notes)
+- [✅ Useful commands](#-useful-commands)
+- [❤️ Made By](#️-made-by)
+
+---
+
+## 📌 Overview
 
 The framework drives a live ebay shopping flow with **Python**, **Playwright**, **Pytest**, and **Allure**.
 
@@ -49,22 +73,22 @@ Authenticate (guest) → Search by name → Filter by max price → Add items to
 
 This project includes:
 
-- UI automation against ebay.com
-- Page Object Model for Home, Login, Search, Item, and Cart
-- Scenario layer (`EbayShop`) with the four required shopping functions
-- Data-driven cases from JSON
-- Settings from `.env` (local) and GitHub Actions `env` (CI)
-- Allure reporting
-- pytest-html report
-- Failure screenshots
-- Playwright traces
-- Runtime logs
+- 🖥️ UI automation against ebay.com
+- 📐 Page Object Model for Home, Login, Search, Item, and Cart
+- 🧩 Scenario layer (`EbayShop`) with the four required shopping functions
+- 📦 Data-driven cases from JSON
+- ⚙️ Settings from `.env` (local) and GitHub Actions `env` (CI)
+- 📊 Allure reporting
+- 📄 pytest-html report
+- 📸 Failure screenshots
+- 🎞 Playwright traces
+- 📝 Runtime logs
 
 ---
 
-## Automated scenario
+## ✅ Automated scenario
 
-### E2E — Search, add to cart, budget
+### 🛒 E2E — Search, add to cart, budget
 
 Automated through the frontend.
 
@@ -97,7 +121,7 @@ tests/test_price_parser.py
 
 ---
 
-## Project structure
+## 🧱 Project structure
 
 ```text
 ebay/
@@ -138,20 +162,21 @@ ebay/
 
 ---
 
-## Tech stack
+## 🛠 Tech stack
 
-- Python 3.14
-- Playwright
-- Pytest
-- Pytest-Playwright
-- Allure Pytest
-- pytest-html
-- Python Dotenv
-- GitHub Actions
+| | Tool | Role |
+| --- | --- | --- |
+| 🐍 | Python 3.14 | Language |
+| 🎭 | Playwright | Browser automation |
+| 🧪 | Pytest + pytest-playwright | Test runner |
+| 📊 | Allure | Step-by-step report |
+| 📄 | pytest-html | Standalone HTML report |
+| 🔐 | python-dotenv | Local `.env` |
+| 🐙 | GitHub Actions | CI + report artifacts |
 
 ---
 
-## Architecture
+## 🏗 Architecture
 
 ```mermaid
 flowchart TB
@@ -222,7 +247,7 @@ The UI test only describes the business flow. `page_setup` groups all page objec
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Python 3.14
 - Git
@@ -231,7 +256,7 @@ The UI test only describes the business flow. `page_setup` groups all page objec
 
 ---
 
-## Environment variables
+## ⚙️ Environment variables
 
 Create `.env` in the project root (already used locally; not committed):
 
@@ -254,7 +279,7 @@ HEADLESS=false
 
 ---
 
-## Installation
+## 📦 Installation
 
 Clone the repository:
 
@@ -289,7 +314,7 @@ playwright install chromium
 
 ---
 
-## Running tests
+## ▶️ Running tests
 
 Headed (default, better against ebay bot checks):
 
@@ -332,7 +357,7 @@ Every run creates `reports/`, including Allure results at `reports/allure-result
 
 ---
 
-## Allure report
+## 📊 Allure report
 
 `pytest.ini` already sets `--alluredir=reports/allure-results`.
 
@@ -369,7 +394,7 @@ allure serve reports/allure-results
 
 ---
 
-## HTML report
+## 📄 HTML report
 
 `pytest.ini` already writes a standalone HTML report. After any `pytest` run:
 
@@ -389,7 +414,7 @@ Required package: `pytest-html`.
 
 ---
 
-## Runtime artifacts
+## 📁 Runtime artifacts
 
 ```text
 reports/
@@ -412,7 +437,7 @@ playwright show-trace reports/traces/cart-total.zip
 
 ---
 
-## Test data
+## 🧪 Test data
 
 Edit `data/test_data.json`. Pytest builds one test per `cases[]` entry.
 
@@ -442,7 +467,7 @@ Edit `data/test_data.json`. Pytest builds one test per `cases[]` entry.
 
 ---
 
-## GitHub Actions
+## 🚀 GitHub Actions
 
 Workflow: [`.github/workflows/e2e.yml`](https://github.com/shlomi10/ebay/blob/main/.github/workflows/e2e.yml)
 
@@ -456,7 +481,7 @@ ebay often blocks datacenter IPs. E2E tests may fail on GitHub runners even when
 
 ---
 
-## Pytest configuration
+## 🧷 Pytest configuration
 
 `pytest.ini`:
 
@@ -471,7 +496,7 @@ markers =
 
 ---
 
-## Limitations and assumptions
+## ⚠️ Limitations and assumptions
 
 - Default is guest. Real login runs only if `EBAY_USER` and `EBAY_PASS` are set. There is no Captcha solver.
 - Buy It Now is enabled to increase the chance of Add to cart (not an auction).
@@ -483,7 +508,7 @@ markers =
 
 ---
 
-## Notes
+## 📌 Notes
 
 - `.env` is for local values through `config/settings.py`.
 - CI values live on the GitHub Actions workflow, not in a committed `.env`.
@@ -493,7 +518,7 @@ markers =
 
 ---
 
-## Useful commands
+## ✅ Useful commands
 
 ```bash
 pytest --headed
