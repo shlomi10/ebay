@@ -7,12 +7,12 @@
 [![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/python/)
 [![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://docs.pytest.org/)
-[![Allure](https://img.shields.io/badge/Allure-GitHub%20Pages-FF6A00?style=for-the-badge&logo=allure&logoColor=white)](https://shlomi10.github.io/ebay/)
+[![Allure](https://img.shields.io/badge/Allure-up%20to%20date-FF6A00?style=for-the-badge&logo=allure&logoColor=white)](https://shlomi10.github.io/ebay/)
 [![pytest-html](https://img.shields.io/badge/pytest--html-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://pytest-html.readthedocs.io/)
 [![python-dotenv](https://img.shields.io/badge/.env-python--dotenv-ECD53F?style=for-the-badge&logoColor=111)](https://github.com/theskumar/python-dotenv)
 [![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/shlomi10/ebay/actions)
 [![CI](https://github.com/shlomi10/ebay/actions/workflows/e2e.yml/badge.svg)](https://github.com/shlomi10/ebay/actions/workflows/e2e.yml)
-[![GitHub Pages](https://img.shields.io/badge/Allure%20report-live-222?style=for-the-badge&logo=githubpages&logoColor=white)](https://shlomi10.github.io/ebay/)
+[![Allure updated](https://img.shields.io/github/last-commit/shlomi10/ebay/gh-pages?style=for-the-badge&logo=githubpages&logoColor=white&label=Allure%20updated)](https://shlomi10.github.io/ebay/)
 [![POM](https://img.shields.io/badge/POM-Page%20Object%20Model-6C63FF?style=for-the-badge&logo=abstract&logoColor=white)](#-architecture)
 [![OOP](https://img.shields.io/badge/OOP-SRP-14B8A6?style=for-the-badge&logo=checkmarx&logoColor=white)](#-architecture)
 [![Data Driven](https://img.shields.io/badge/Data--Driven-JSON-2088FF?style=for-the-badge&logo=json&logoColor=white)](data/test_data.json)
@@ -29,7 +29,7 @@
 
 End-to-end automation for [ebay.com](https://www.ebay.com/): search by name and price, add items to the cart, and assert that the cart total does not exceed the budget.
 
-📊 **Latest Allure report:** [shlomi10.github.io/ebay](https://shlomi10.github.io/ebay/)
+📊 **Allure report (kept up to date after every CI run on `main`):** [shlomi10.github.io/ebay](https://shlomi10.github.io/ebay/)
 
 ---
 
@@ -357,7 +357,7 @@ Every run creates `reports/`, including Allure results at `reports/allure-result
 
 ## 📊 Allure report
 
-Live CI report (GitHub Pages, updated after every `main` run):
+Live CI report on GitHub Pages. It stays up to date: every successful run on `main` republishes it.
 
 **https://shlomi10.github.io/ebay/**
 
@@ -481,7 +481,7 @@ CI runs the price-parser unit tests. The live ebay E2E tests are skipped on GitH
 pytest -m e2e --headed
 ```
 
-When the job finishes on `main`, the Allure HTML report is published to GitHub Pages:
+When the job finishes on `main`, the Allure HTML report is republished to GitHub Pages so the live report stays up to date:
 
 **https://shlomi10.github.io/ebay/**
 
