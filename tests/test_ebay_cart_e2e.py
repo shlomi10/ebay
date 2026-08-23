@@ -27,4 +27,5 @@ def test_search_add_to_cart_budget(page_setup, settings, case):
         case["query"], case["max_price"], case["limit"]
     )
     added = shop.add_items_to_cart(urls, needed=case["limit"])
-    shop.assert_cart_total_not_exceeds(case["max_price"], added)
+    total, limit = shop.read_cart_budget(case["max_price"], added)
+    assert total <= limit + 0.009, f"Cart subtotal {total} exceeds budget {limit}"

@@ -71,8 +71,8 @@ class EbayShop:
             raise AssertionError("No items were added to cart")
         return added
 
-    @allure.step("Assert cart total does not exceed {budget_per_item} * {items_count}")
-    def assert_cart_total_not_exceeds(self, budget_per_item: float, items_count: int) -> None:
+    @allure.step("Read cart budget {budget_per_item} * {items_count}")
+    def read_cart_budget(self, budget_per_item: float, items_count: int) -> tuple[float, float]:
         trace_path = self.settings.trace_dir / "cart-total.zip"
         tracing_started = False
         try:
@@ -90,10 +90,7 @@ class EbayShop:
                 name="cart-budget",
                 attachment_type=allure.attachment_type.TEXT,
             )
-            if total > limit + 0.009:
-                raise AssertionError(
-                    f"Cart subtotal {total} exceeds budget {limit} ({budget_per_item} * {items_count})"
-                )
+            return total, limit
         finally:
             if tracing_started:
                 self.page.context.tracing.stop(path=str(trace_path))
