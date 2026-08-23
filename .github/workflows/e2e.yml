@@ -35,7 +35,7 @@ jobs:
         run: playwright install chromium --with-deps
 
       - name: Run tests
-        run: pytest
+        run: pytest --alluredir=reports/allure-results --html=reports/report.html --self-contained-html
 
       - uses: actions/setup-node@v4
         if: always()
