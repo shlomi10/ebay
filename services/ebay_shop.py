@@ -38,7 +38,7 @@ class EbayShop:
         )
         collected: list[str] = []
         seen: set[str] = set()
-        target = limit + 5
+        target = limit
         while len(collected) < target:
             batch = self.search_results.collect_urls_under_price(
                 max_price, target - len(collected), self.settings.base_url, seen

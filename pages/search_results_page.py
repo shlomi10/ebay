@@ -98,15 +98,28 @@ class SearchResultsPage(BasePage):
     def _apply_url_price_filter(self, max_price: float, buy_it_now: bool, free_shipping: bool) -> None:
         self.logger.info("Apply URL price filter %s", max_price)
         parsed = urlparse(self.page.url)
-        params = dict(parse_qsl(parsed.query, keep_blank_values=True))
+        current = dict(parse_qsl(parsed.query, keep_blank_values=True))
+        params = dict(current)
         params["_udhi"] = str(int(max_price))
         params["_ipg"] = params.get("_ipg", "60")
         if buy_it_now:
             params["LH_BIN"] = "1"
         if free_shipping:
             params["LH_FS"] = "1"
+        already_filtered = current.get("_udhi") == params["_udhi"]
+        if buy_it_now:
+            already_filtered = already_filtered and current.get("LH_BIN") == "1"
+        if free_shipping:
+            already_filtered = already_filtered and current.get("LH_FS") == "1"
+        if already_filtered:
+            self.wait_for_results()
+            return
         next_url = urlunparse(parsed._replace(query=urlencode(params)))
-        self.open(next_url)
+        try:
+            self.page.goto(next_url, wait_until="commit", timeout=15000)
+        except PlaywrightTimeoutError:
+            self.logger.info("Filtered search navigation timed out")
+        self.dismiss_overlays()
         self.wait_for_results()
 
     @allure.step("get card title locator")
