@@ -5,7 +5,7 @@ This file contains the login page
 from __future__ import annotations
 
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Page, TimeoutError as PlaywrightTimeoutError
 
 from pages.base_page import BasePage
 
@@ -80,20 +80,20 @@ class LoginPage(BasePage):
         zip_open = False
         try:
             country_open = self.country_field.first.is_visible()
-        except Exception:
+        except PlaywrightTimeoutError:
             pass
         try:
             zip_open = self.zip_input.first.is_visible()
-        except Exception:
+        except PlaywrightTimeoutError:
             pass
         if not country_open and not zip_open:
             return
         try:
             self.select_dropdown_option(self.country_field.first, "United States")
-        except Exception:
+        except PlaywrightTimeoutError:
             try:
                 self.country_field.first.select_option(label="United States")
-            except Exception:
+            except PlaywrightTimeoutError:
                 pass
         if self.shown(self.zip_input):
             self.fill(self.zip_input.first, "10001")

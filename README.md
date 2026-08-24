@@ -197,7 +197,7 @@ flowchart TB
     A["authenticate"]
     Q["search under price"]
     ADD["add to cart"]
-    ASSERT["assert cart total"]
+    READ["read cart budget"]
   end
 
   subgraph pom [pages POM]
@@ -217,11 +217,11 @@ flowchart TB
   T --> S
   D --> T
   C --> S
-  S --> A & Q & ADD & ASSERT
+  S --> A & Q & ADD & READ
   A --> L & H
   Q --> H & SR
   ADD --> I
-  ASSERT --> CT
+  READ --> CT
   SR --> P & U
   CT --> P
   I --> R
@@ -230,9 +230,10 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-  A["Authenticate"] --> B["Search by name and price"]
+  A["Authenticate"] -->   B["Search by name and price"]
   B --> C["Add to cart"]
-  C --> D["Assert cart total"]
+  C --> D["Read cart budget"]
+  D --> E["Assert total ≤ limit"]
 ```
 
 - `pages/` — Page Object Model. Each screen owns its locators and actions. Shared clicks/waits live in `BasePage`. Site-wide overlays (cookies, lightbox) are dismissed from `BasePage` because they can appear on any page.
@@ -240,13 +241,13 @@ flowchart LR
   - `authenticate`
   - `search_items_by_name_under_price`
   - `add_items_to_cart`
-  - `assert_cart_total_not_exceeds`
+  - `read_cart_budget`
 - `conftest.py` — Browser fixtures, `Pages` container, Allure/HTML attachments on pass/fail.
 - `utils/` — Price parsing, URL canonicalization, screenshots, traces, logging.
 - `config/settings.py` — Loads settings from `.env`.
-- `tests/` — Thin Pytest tests that call `EbayShop`.
+- `tests/` — Thin Pytest tests that call `EbayShop` and assert `total <= limit + 0.009`.
 
-The UI test only describes the business flow. `page_setup` groups all page objects for the test.
+The UI test describes the business flow and owns the budget assertion. `read_cart_budget` opens the cart and returns `(total, limit)`. `page_setup` groups all page objects for the test.
 
 ---
 

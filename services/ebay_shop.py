@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import allure
+from playwright.sync_api import Error as PlaywrightError
 
 from config.settings import Settings
 from pages.item_page import ItemPage
@@ -78,7 +79,7 @@ class EbayShop:
         try:
             self.page.context.tracing.start(screenshots=True, snapshots=True, sources=True)
             tracing_started = True
-        except Exception:
+        except PlaywrightError:
             tracing_started = False
         try:
             self.cart.open()

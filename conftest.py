@@ -5,6 +5,7 @@ import os
 
 import allure
 import pytest
+from playwright.sync_api import Error as PlaywrightError, TimeoutError as PlaywrightTimeoutError
 from pytest_html import extras
 
 from config.settings import ROOT, load_settings
@@ -83,7 +84,7 @@ def pytest_runtest_makereport(item, call):
         shot_name = "failure-screenshot" if report.failed else "screenshot"
         allure.attach(png, name=shot_name, attachment_type=allure.attachment_type.PNG)
         html_extras.append(extras.png(base64.b64encode(png).decode("ascii"), shot_name))
-    except Exception:
+    except (PlaywrightTimeoutError, PlaywrightError):
         pass
     log_name = "failure-log" if report.failed else "success-log"
     allure.attach(log_text, name=log_name, attachment_type=allure.attachment_type.TEXT)

@@ -7,7 +7,7 @@ from __future__ import annotations
 import re
 
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Page, TimeoutError as PlaywrightTimeoutError
 
 from pages.base_page import BasePage
 from utils.price_parser import parse_items_total, parse_price
@@ -31,7 +31,7 @@ class CartPage(BasePage):
             self.page.wait_for_load_state("domcontentloaded")
             self.dismiss_overlays()
             return
-        except Exception:
+        except PlaywrightTimeoutError:
             super().open(self.cart_url)
 
     @allure.step("read cart items total")

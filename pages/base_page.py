@@ -28,80 +28,80 @@ class BasePage:
         try:
             self.logger.info(f"Click element: {element}")
             element.click(timeout=timeout, force=force)
-        except Exception as error:
+        except PlaywrightTimeoutError:
             self.logger.exception(f"Failed to click element: {element}")
-            raise error
+            raise
 
     def fill(self, element: Locator, text: str, timeout: int = DEFAULT_TIMEOUT):
         try:
             self.logger.info(f"Fill element: {element}")
             expect(element).to_be_visible(timeout=timeout)
             element.fill(text)
-        except Exception as error:
+        except (PlaywrightTimeoutError, AssertionError):
             self.logger.exception(f"Failed to fill element: {element}")
-            raise error
+            raise
 
     def wait_visible(self, element: Locator, timeout: int = DEFAULT_TIMEOUT):
         try:
             self.logger.info(f"Wait visible: {element}")
             expect(element).to_be_visible(timeout=timeout)
-        except Exception as error:
+        except (PlaywrightTimeoutError, AssertionError):
             self.logger.exception(f"Element was not visible: {element}")
-            raise error
+            raise
 
     def wait_hidden(self, element: Locator, timeout: int = DEFAULT_TIMEOUT):
         try:
             self.logger.info(f"Wait hidden: {element}")
             expect(element).to_be_hidden(timeout=timeout)
-        except Exception as error:
+        except (PlaywrightTimeoutError, AssertionError):
             self.logger.exception(f"Element was not hidden: {element}")
-            raise error
+            raise
 
     def wait_enabled(self, element: Locator, timeout: int = DEFAULT_TIMEOUT):
         try:
             self.logger.info(f"Wait enabled: {element}")
             expect(element).to_be_enabled(timeout=timeout)
-        except Exception as error:
+        except (PlaywrightTimeoutError, AssertionError):
             self.logger.exception(f"Element was not enabled: {element}")
-            raise error
+            raise
 
     def wait_text(self, element: Locator, text: str, timeout: int = DEFAULT_TIMEOUT):
         try:
             self.logger.info(f"Wait text '{text}' in element: {element}")
             expect(element).to_contain_text(text, timeout=timeout)
-        except Exception as error:
+        except (PlaywrightTimeoutError, AssertionError):
             self.logger.exception(f"Text '{text}' was not found in element: {element}")
-            raise error
+            raise
 
     def get_clean_text(self, element: Locator) -> str:
         try:
             text = " ".join(element.inner_text().split())
             self.logger.info(f"Element text: {text}")
             return text
-        except Exception as error:
+        except PlaywrightTimeoutError:
             self.logger.exception(f"Failed to get text from element: {element}")
-            raise error
+            raise
 
     def select_dropdown_option(self, dropdown: Locator, option: str):
         try:
             self.logger.info(f"Select dropdown option: {option}")
             self.click(dropdown)
             self.click(self.page.get_by_role("option", name=option))
-        except Exception as error:
+        except PlaywrightTimeoutError:
             self.logger.exception(f"Failed to select dropdown option: {option}")
-            raise error
+            raise
 
     def shown(self, locator: Locator) -> bool:
         try:
             return locator.first.is_visible()
-        except Exception:
+        except PlaywrightTimeoutError:
             return False
 
     def is_visible(self, locator: Locator, timeout: int = 800) -> bool:
         try:
             locator.first.wait_for(state="visible", timeout=timeout)
             return True
-        except Exception:
+        except PlaywrightTimeoutError:
             return False
 
     def click_visible(self, locator: Locator, timeout: int = 1500) -> bool:
@@ -123,5 +123,5 @@ class BasePage:
             try:
                 if locator.first.is_visible():
                     locator.first.click(timeout=400)
-            except Exception:
+            except PlaywrightTimeoutError:
                 continue

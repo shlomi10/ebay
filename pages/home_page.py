@@ -5,7 +5,7 @@ This file contains the homepage
 from __future__ import annotations
 
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Page, TimeoutError as PlaywrightTimeoutError
 
 from pages.base_page import BasePage
 
@@ -33,6 +33,6 @@ class HomePage(BasePage):
         box.press("Enter")
         try:
             self.page.wait_for_url("**/sch/**", timeout=8000, wait_until="domcontentloaded")
-        except Exception:
+        except PlaywrightTimeoutError:
             self.logger.info("Search did not navigate to results url")
         self.dismiss_overlays()

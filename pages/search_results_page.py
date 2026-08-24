@@ -36,7 +36,7 @@ class SearchResultsPage(BasePage):
             raise AssertionError("ebay showed a bot-challenge page instead of search results")
         try:
             self.wait_visible(self.results_list.first, timeout=8000)
-        except Exception:
+        except (PlaywrightTimeoutError, AssertionError):
             self.wait_visible(self.result_cards.first, timeout=8000)
         self.dismiss_overlays()
 
@@ -78,7 +78,7 @@ class SearchResultsPage(BasePage):
             self.page.wait_for_load_state("domcontentloaded")
             self.wait_for_results()
             return True
-        except (PlaywrightTimeoutError, Exception):
+        except PlaywrightTimeoutError:
             self.logger.info("Next page is not available")
             return False
 
