@@ -9,7 +9,7 @@
   <a href="https://shlomi10.github.io/ebay/"><img src="https://img.shields.io/badge/%E2%96%B6%20Allure%20report-FF6A00?style=for-the-badge" alt="Allure report"></a>
 </p>
 
-[![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.15-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/python/)
 [![Pytest](https://img.shields.io/badge/Pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://docs.pytest.org/)
 [![Allure](https://img.shields.io/badge/Allure-up%20to%20date-FF6A00?style=for-the-badge&logo=allure&logoColor=white)](https://shlomi10.github.io/ebay/)
@@ -169,7 +169,7 @@ ebay/
 
 | | Tool | Role |
 | --- | --- | --- |
-| 🐍 | Python 3.14 | Language |
+| 🐍 | Python 3.15 | Language |
 | 🎭 | Playwright | Browser automation |
 | 🧪 | Pytest + pytest-playwright | Test runner |
 | 📊 | Allure | Step-by-step report |
